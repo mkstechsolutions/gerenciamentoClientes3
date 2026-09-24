@@ -2,7 +2,7 @@
 // CONFIGURAÇÕES E VARIÁVEIS GLOBAIS
 // ==========================================
 // Certifique-se de atualizar esta URL caso tenha gerado uma Nova Implantação
-window.WEB_APP_URL = window.WEB_APP_URL || "https://script.google.com/macros/s/AKfycbyhF4ME2RPaObEofW7072DAwmdLSOdkQSNC-3pa4N9zCVSh3PyXeaLasRVwalrs0MFc/exec"; 
+window.WEB_APP_URL = window.WEB_APP_URL || "https://script.google.com/macros/s/AKfycbxP2dRQxCCUM1esMb7kloJhQBowdI6BJ4B6c5wNELu6kDizuJ9oaOKBg2aJCBdvdzAj/exec"; 
 
 let SENHA_USUARIO = "";
 let DADOS_BRUTOS = [];
