@@ -89,7 +89,7 @@ function resetarTimerInatividade() {
                 fazerLogout();
                 showToast("Sessão expirada por inatividade", true);
             }
-        }, 600000);
+        }, 600000); // 10 minutos
     }
 }
 
@@ -205,7 +205,7 @@ function calcularValorParcelaAutomatico() {
 }
 
 // ==========================================
-// REQUISIÇÕES DA API (FUNÇÃO AJUSTADA PARA EVITAR ERRO DE CORS)
+// REQUISIÇÕES DA API (COMUNICAÇÃO GOOGLE APPS SCRIPT)
 // ==========================================
 async function api(dados) {
     dados.senha = SENHA_USUARIO;
@@ -349,7 +349,7 @@ function renderTabela(rows) {
             if (diffDias < 0) { 
                 corData = "text-red-500 font-extrabold"; 
                 statusIcon = "⚠️ "; 
-                rowClass = "bg-red-950/20 border-l-4 border-l-red-500"; 
+                rowClass = "bg-red-950/20 border-l-4 border-l-red-500 atrasado-row"; 
                 badgeAtraso = `<span class="text-[9px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-md font-bold uppercase ml-2">Atrasado (${Math.abs(diffDias)}d)</span>`;
             }
             else if (diffDias <= 3) { 
@@ -643,15 +643,18 @@ async function salvarEdicaoCliente() {
     document.getElementById('modalEditar')?.classList.add('hidden');
     travarInterface(true);
 
+    const valorNum = limparValorParaEnvio(document.getElementById('edit_valor')?.value);
+    const lucroNum = limparValorParaEnvio(document.getElementById('edit_lucro')?.value);
+
     try {
         await api({
             action: "editar",
-            indexPlanilha: clienteEditandoIndex,
+            indexPlanilha: Number(clienteEditandoIndex),
             nome: nomeVal,
             tel: document.getElementById('edit_tel')?.value || '',
             item: document.getElementById('edit_item')?.value || '',
-            valor: limparValorParaEnvio(document.getElementById('edit_valor')?.value),
-            lucro: limparValorParaEnvio(document.getElementById('edit_lucro')?.value),
+            valor: valorNum,
+            lucro: lucroNum,
             proximoVencimento: document.getElementById('edit_data_pag')?.value || '',
             obs: document.getElementById('edit_obs')?.value || ''
         });
